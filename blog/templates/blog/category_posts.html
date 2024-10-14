@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Posts in {{ category.name }}{% endblock %}
+{% block main %}
+<section class="md:w-[80%] mx-auto mt-10 font-robotoSerif px-5 py-5">
+    <h1 class="text-center text-3xl font-bold mb-6">Posts in {{ category.name }}</h1>
+    
+    {% if posts %}
+        <div class="grid md:grid-cols-3 gap-6">
+            {% for post in posts %}
+                <a href="{% url 'post_detail' post.pk %}" class="shadow-md rounded-md block">
+                    <div>
+                        {% if post.image %}
+                            <img src="{{ post.image.url }}" class="rounded-t-sm w-full h-40 object-cover" alt="{{ post.title }}">
+                        {% else %}
+                            <img src="{% static 'image/placeholder.jpg' %}" class="rounded-t-sm w-full h-40 object-cover" alt="No image available">
+                        {% endif %}
+                    </div>
+                    <div class="p-7 space-y-2">
+                        <p class="bg-color-mustard-yellow inline-block px-1">{{ post.category.name }}</p>
+                        <p class="text-xl font-bold">{{ post.title }}</p>
+                        <p>{{ post.content|truncatewords:20 }}</p> <!-- Truncated post content -->
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="font-oswald">{{ post.author }}</span>
+                            <span class="font-oswald">{{ post.created_at|date:"F d, Y" }}</span>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center text-lg">No posts found in this category.</p>
+    {% endif %}
+</section>
+{% endblock %}

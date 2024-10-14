@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Login Page{% endblock %}
+{% block main %}
+
+<div class="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg">
+    <h2 class="text-2xl font-bold mb-6">Edit Profile</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Username -->
+        <div class="mb-4">
+            <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+            <input type="text" id="username" name="username" class="block w-full p-2 mt-1 border border-gray-300 rounded-md shadow-sm" placeholder="Username" value="{{ user_form.username.value }}">
+        </div>
+
+        <!-- Email -->
+        <div class="mb-4">
+            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+            <input type="email" id="email" name="email" class="block w-full p-2 mt-1 border border-gray-300 rounded-md shadow-sm" placeholder="Email" value="{{ user_form.email.value }}">
+        </div>
+        
+        <!-- Bio -->
+        <div class="mb-4">
+            <label for="bio" class="block text-sm font-medium text-gray-700">Bio</label>
+            <textarea id="bio" name="bio" class="block w-full p-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50" placeholder="Tell us about yourself">{{ profile_form.bio.value }}</textarea>
+        </div>
+
+        <!-- Profile Picture -->
+        <div class="mb-4">
+            <label for="profile_picture" class="block text-sm font-medium text-gray-700">Profile Picture</label>
+            <input type="file" id="profile_picture" name="profile_picture" class="block w-full p-2 mt-1 border border-gray-300 rounded-md shadow-sm" />
+        </div>
+
+        <!-- Phone Number -->
+        <div class="mb-4">
+            <label for="phone_number" class="block text-sm font-medium text-gray-700">Phone Number</label>
+            <input type="text" id="phone_number" name="phone_number" class="block w-full p-2 mt-1 border border-gray-300 rounded-md shadow-sm" placeholder="+1234567890" value="{{ profile_form.phone_number.value }}">
+        </div>
+
+        <!-- Address -->
+        <div class="mb-4">
+            <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+            <input type="text" id="address" name="address" class="block w-full p-2 mt-1 border border-gray-300 rounded-md shadow-sm" placeholder="123 Main St" value="{{ profile_form.address.value }}">
+        </div>
+
+        <!-- City -->
+        <div class="mb-4">
+            <label for="city" class="block text-sm font-medium text-gray-700">City</label>
+            <input type="text" id="city" name="city" class="block w-full p-2 mt-1 border border-gray-300 rounded-md shadow-sm" placeholder="Your City" value="{{ profile_form.city.value }}">
+        </div>
+
+        <!-- Country -->
+        <div class="mb-4">
+            <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
+            <input type="text" id="country" name="country" class="block w-full p-2 mt-1 border border-gray-300 rounded-md shadow-sm" placeholder="Your Country" value="{{ profile_form.country.value }}">
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700">Update Profile</button>
+    </form>
+</div>
+
+
+{% endblock %}

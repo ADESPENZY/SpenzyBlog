@@ -1,0 +1,236 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home Page{% endblock %}
+{% block main %}
+
+<!-- messages -->
+{% if messages %}
+    <div class="mt-4 w-full">
+        {% for message in messages %}
+            {% if message.tags == "success" %}
+                <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-md mb-3 text-center" role="alert">
+                    <p class="font-bold">{{ message }}</p>
+                </div>
+            {% elif message.tags == "error" or message.tags == "danger" %}
+                <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md mb-3 text-center" role="alert">
+                    <p class="font-bold">{{ message }}</p>
+                </div>
+            {% else %}
+                <div class="bg-gray-100 border-l-4 border-gray-500 text-gray-700 p-4 rounded-md mb-3 text-center" role="alert">
+                    <p class="font-bold">{{ message }}</p>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endif %}
+
+<section class="md:w-[80%] mx-auto mt-10 font-robotoSerif px-7 ">
+    <!-- Toggle button for mobile -->
+    <div class="md:hidden flex justify-between items-center">
+        <h2 class="font-semibold">Categories</h2>
+        <button id="toggle-btn" class="text-forest-green font-bold">
+            <i class="fa-solid fa-bars"></i> 
+        </button>
+    </div>
+
+    <!-- Category List -->
+    <div id="category-list" class="hidden md:block">
+        <ul class="flex flex-col md:flex-row space-y-3 md:justify-center items-center md:space-y-0  md:space-x-5 font-semibold ">
+            {% for category in categories %}
+                <li class="leading-normal">
+                    <a class="border-b-2 border-color-forest-green " href="{% url 'category_posts' category.slug %}">
+                        {{ category.name }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+<!-- <section class="md:w-[80%] mx-auto mt-10 font-robotoSerif px-7 ">
+    <div class="" > 
+        <ul class="md:flex justify-center items-center space-x-5 font-semibold ">
+            {% for category in categories %}
+                <li>
+                    <a class="border-b-2 border-color-forest-green" href="{% url 'category_posts' category.slug %}">{{ category.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section> -->
+
+<section class=" md:w-[80%] mx-auto mt-5 font-robotoSerif px-5 py-5">
+    <div class="grid md:grid-cols-2 gap-5  rounded-lg  ">
+        
+        <div class="shadow-md rounded-md">
+            {% if latest_technology_post %}
+            <a href="{% url 'post_detail' latest_technology_post.pk %}">
+                <div>
+                    <img src="{{ latest_technology_post.image.url }}" class="rounded-t-sm" alt="blog-images">
+                </div>
+                <div class="p-7 space-y-2">
+                    <p class="bg-color-mustard-yellow inline-block px-1">{{ latest_technology_post.category.name }}</p>
+                    <p>{{ latest_technology_post.title }}</p>
+                    <p class="mt-4">{{ latest_technology_post.content|truncatewords:5 }}</p>
+                    <div class="flex justify-between">
+                        <span class="font-oswald pr-4">{{ latest_technology_post.author.username }}</span> <!-- Assuming you have an author field -->
+                        <span class="font-oswald">{{ latest_technology_post.created_at|date:"F j, Y" }}</span> <!-- Format date as needed -->
+                    </div>
+                </div>
+            </a>
+            {% else %}
+                <p>No posts available in the Technology category.</p>
+            {% endif %}
+        </div>
+
+        <div class="">
+            <div class="grid md:grid-row-3 gap-5">
+                {% if latest_politics_post %}
+                <a href="{% url 'post_detail' latest_politics_post.pk %}">
+
+                    <div class="flex flex-col md:flex-row md:items-center gap-5 shadow-md">
+                        <div class="flex-1">
+                            <img src="{{ latest_politics_post.image.url }}" class="rounded-sm h-full w-full object-cover" alt="blog-images">
+                        </div>
+                        <div class="space-y-2 flex-1 p-5 md:p-0">
+                            <p class="bg-color-mustard-yellow inline-block px-1">{{ latest_politics_post.category.name }}</p>
+                            <p class="text-sm">{{ latest_politics_post.title }}</p>
+                            <p class="text-sm">{{ latest_politics_post.content|truncatewords:5 }}</p>
+                            <div>
+                                <span class="font-oswald pr-4">{{ latest_politics_post.author.username }}</span>
+                                <span class="font-oswald">{{ latest_politics_post.created_at|date:"F j, Y" }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                {% else %}
+                    <p>No posts available in the Politics category.</p>
+                {% endif %}
+
+                {% if latest_business_post %}
+                <a href="{% url 'post_detail' latest_business_post.pk %}">
+                    <div class="flex flex-col md:flex-row items-center gap-5 shadow-md">
+                        <div class="flex-1 h-full">
+                            <img src="{{ latest_business_post.image.url }}" class="rounded-sm h-full w-full object-cover" alt="blog-images">
+                        </div>
+                        <div class="space-y-2 flex-1 p-5 md:p-0">
+                            <p class="bg-color-mustard-yellow inline-block px-1">{{ latest_business_post.category.name }}</p>
+                            <p class="text-sm">{{ latest_business_post.title  }}</p>
+                            <p class="text-sm">{{ latest_business_post.content|truncatewords:5 }}</p>
+                            <div>
+                                <span class="font-oswald pr-4">{{ latest_business_post.author.username }}</span>
+                                <span class="font-oswald">{{ latest_business_post.created_at|date:"F j, Y" }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                {% else %}
+                    <p>No posts available in the business category.</p>
+                {% endif %}
+
+                {% if latest_sport_post %}
+                <a href="{% url 'post_detail' latest_sport_post.pk %}">
+                    <div class="flex flex-col md:flex-row items-center gap-5 shadow-md h-full">
+                        <div class="flex-1 h-full">
+                            <img src="{{ latest_sport_post.image.url }}" class="rounded-sm h-full w-full object-cover" alt="blog-images">
+                        </div>
+                        <div class="space-y-2 flex-1 p-5 md:p-0">
+                            <p class="bg-color-mustard-yellow inline-block px-1">{{ latest_sport_post.category.name }}</p>
+                            <p class="text-sm">{{ latest_sport_post.title }}</p>
+                            <p class="text-sm">{{ latest_sport_post.content|truncatewords:5 }}</p>
+                            <div>
+                                <span class="font-oswald pr-4">{{ latest_sport_post.author.username }}</span>
+                                <span class="font-oswald">{{ latest_sport_post.created_at|date:"F j, Y" }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                {% else %}
+                    <p>No posts available in the business category.</p>
+                {% endif %}
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="border-b-2 border-color-mustard-yellow md:w-[77%] mx-auto my-7">
+</div>
+
+<section class="md:w-[80%] mx-auto font-robotoSerif px-7 py-3">
+    <div class="grid md:grid-cols-5 space-y-3 md:space-y-0  ">
+        <div class="">
+            {% if latest_health_post %}
+            <a href="{% url 'post_detail' latest_health_post.pk %}">
+            <div class="md:space-y-3 space-y-0">
+                <p class="text-sm font-oswald text-black text-opacity-50">{{ latest_health_post.author.username }} | <span>{{ latest_health_post.category.name }}</span></p>
+                <p class="text-sm">{{ latest_health_post.title | truncatewords:10 }}</p>
+            </div>
+            {% else %}
+            <p>No posts available in the health category.</p>
+            {% endif %} 
+            </a>  
+        </div>
+        <div>
+            {% if second_technology_post %}
+            <a href="{% url 'post_detail' latest_technology_post.pk %}">
+            <div class="md:space-y-3 space-y-0">
+                <p class="text-sm font-oswald text-black text-opacity-50">{{ second_technology_post.author.username }} | <span>{{ second_technology_post.category.name }}</span></p>
+                <p class="text-sm">{{ second_technology_post.title | truncatewords:10 }}</p>
+            </div>
+            {% else %}
+            <p>No posts available in the health category.</p>
+            {% endif %}   
+            </a>
+        </div>
+        <div>
+            {% if second_sport_post %}
+            <a href="{% url 'post_detail' latest_sport_post.pk %}">
+            <div class="md:space-y-3 space-y-0">
+                <p class="text-sm font-oswald text-black text-opacity-50">{{ second_sport_post.author.username }} | <span>{{ second_sport_post.category.name }}</span></p>
+                <p class="text-sm">{{ second_sport_post.title | truncatewords:10 }}</p>
+            </div>
+            {% else %}
+            <p>No posts available in the health category.</p>
+            {% endif %}  
+            </a> 
+        </div>
+        <div>
+            {% if latest_lifestyle_post %}
+            <a href="{% url 'post_detail' latest_lifestyle_post.pk %}">
+            <div class="md:space-y-3 space-y-0">
+                <p class="text-sm font-oswald text-black text-opacity-50">{{ latest_lifestyle_post.author.username }} | <span>{{ latest_lifestyle_post.category.name }}</span></p>
+                <p class="text-sm">{{ latest_lifestyle_post.title | truncatewords:10 }}</p>
+            </div>
+            {% else %}
+            <p>No posts available in the health category.</p>
+            {% endif %}  
+            </a> 
+        </div>
+        <div>
+            {% if second_health_post %}
+            <a href="{% url 'post_detail' latest_health_post.pk %}">
+            <div class="md:space-y-3 space-y-0">
+                <p class="text-sm font-oswald text-black text-opacity-50">{{ second_health_post.author.username }} | <span>{{ second_health_post.category.name }}</span></p>
+                <p class="text-sm">{{ second_health_post.title | truncatewords:10 }}</p>
+            </div>
+            {% else %}
+            <p>No posts available in the health category.</p>
+            {% endif %}  
+            </a> 
+        </div>
+        
+    </div>
+</section>
+
+<script>
+    // JavaScript to toggle the category list on mobile
+    const toggleBtn = document.getElementById('toggle-btn');
+    const categoryList = document.getElementById('category-list');
+
+    toggleBtn.addEventListener('click', () => {
+        categoryList.classList.toggle('hidden'); // Toggle hidden class
+    });
+</script>
+<script src="{% static 'js/style.js' %}"></script>
+{% endblock %}
+    

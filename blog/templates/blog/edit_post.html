@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home Page{% endblock %}
+{% block main %}
+<section class="max-w-2xl mx-auto mt-10 bg-gray-100 p-10 rounded-md font-robotoSerif">
+    <h1 class="text-center text-3xl font-bold">Update Post Here</h1>
+    <form method="POST" enctype="multipart/form-data" class="space-y-6">
+        {% csrf_token %}
+
+        <!-- Title -->
+        <div class="flex flex-col space-y-2">
+            <label for="id_title" class="text-lg font-semibold">Title</label>
+            <input 
+                type="text" 
+                name="title" 
+                id="id_title" 
+                class="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-color-forest-green" 
+                placeholder="Enter the post title" 
+                value="{{ form.title.value|default_if_none:'' }}">
+            {% if form.title.errors %}
+                <p class="text-red-500 text-sm">{{ form.title.errors }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Content -->
+        <div class="flex flex-col space-y-2">
+            <label for="id_content" class="text-lg font-semibold">Content</label>
+            <textarea 
+                name="content" 
+                id="id_content" 
+                rows="6" 
+                class="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-color-forest-green" 
+                placeholder="Write your post content">{{ form.content.value|default_if_none:'' }}</textarea>
+            {% if form.content.errors %}
+                <p class="text-red-500 text-sm">{{ form.content.errors }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Image Upload -->
+        <div class="flex flex-col space-y-2">
+            <label for="id_image" class="text-lg font-semibold">Upload Image</label>
+            <input 
+                type="file" 
+                name="image" 
+                id="id_image" 
+                class="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-color-forest-green">
+            {% if form.image.errors %}
+                <p class="text-red-500 text-sm">{{ form.image.errors }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Category Selection -->
+        <div class="flex flex-col space-y-2">
+            <label for="id_category" class="text-lg font-semibold">Category</label>
+        <select 
+            name="category" 
+            id="id_category" 
+            class="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-color-forest-green">
+            <option value="">Select Category</option>  <!-- Optional default option -->
+            {% for category in form.category.field.queryset %}
+                <option value="{{ category.id }}" {% if category.id == form.category.value %}selected{% endif %}>
+                    {{ category.name }}
+                </option>
+            {% endfor %}
+        </select>
+        {% if form.category.errors %}
+            <p class="text-red-500 text-sm">{{ form.category.errors }}</p>
+        {% endif %}
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-center">
+            <button 
+                type="submit" 
+                class="bg-color-mustard-yellow text-white px-4 py-2 rounded-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400">
+                Submit Post
+            </button>
+        </div>
+    </form>
+</section>
+{% endblock %}

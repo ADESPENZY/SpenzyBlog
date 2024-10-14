@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home Page{% endblock %}
+{% block main %}
+<section class="md:w-[80%] mx-auto font-robotoSerif px-7 py-3 mt-10">
+    <div class="flex flex-col md:flex-row items-center justify-between shadow-inner shadow-color-mustard-yellow p-5 rounded-md">
+        <div class="flex items-center gap-2">
+            <div class="">
+                {% if profile.profile_picture %}
+                   <img src="{{ profile.profile_picture.url }}" class="h-20 w-20 rounded-full p-1 m-3 cursor-pointer" alt="">
+                {% else %}
+                    <img src="{% static 'image/default.png' %}" class="h-30 w-30 rounded-full p-1 m-3 cursor-pointer" alt="">
+                {% endif %}
+            </div>
+            <div>
+                <p>{{ user.username }}</p>
+                <p>{{ user.email }}</p>
+                <p>Date Joined: {{ user.date_joined|date:"F j, Y" }}</p>
+            </div>
+        </div>
+        <div>
+            <a href="{% url 'edit-profile' %}" class=" text-blue-600  border-b-2 border-color-mustard-yellow capitalize hover:bg-color-mustard-yellow ">Edit Profile</a>
+        </div>
+    </div>
+</section>
+
+<section class="md:w-[80%] mx-auto font-robotoSerif px-7 py-3 mt-5">
+    <div class="grid md:grid-cols-3 gap-3 ">
+        <div class="p-5 space-y-5 shadow-inner shadow-color-forest-green rounded-md">
+            <h3>Posts</h3>
+            <p>You have Published {{ post_count }} post{% if post_count != 1 %}s{% endif %}</p>
+            <div>
+                <a href="{% url 'view-post-page' request.user.username %}" class="capitalize bg-color-mustard-yellow p-2 rounded-sm">View Your Posts</a>
+            </div>
+        </div>
+
+        <div class="p-5 space-y-5 shadow-inner shadow-black rounded-md">
+            <h3>Followers</h3>
+            <p>You have 130 Followers</p>
+            <div>
+                <a href="" class=" capitalize bg-color-forest-green p-2 rounded-sm">View Followers</a>
+            </div>
+        </div>
+
+        <div class="p-5 space-y-5 shadow-inner shadow-color-mustard-yellow rounded-md">
+            <h3>Comments</h3>
+            <p>Your posts have {{ total_comments }} Comments</p> <!-- Use total_comments from context -->
+            <div>
+                <a href="" class="capitalize bg-black text-white p-2 rounded-sm">View Comments</a>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<section class="md:w-[80%] mx-auto font-robotoSerif px-7 py-3 mt-5">
+    <h3 class="font-semibold text-2xl">Recent Posts</h3>
+    <div class="grid md:grid-cols-3 gap-3 mt-10 ">
+        {% for post in posts %}
+        <div class="border border-gray-200 rounded-lg">
+            <img src="{{ post.image.url }}" alt="{{ post.title }}" class="w-full h-40 object-cover mb-3">
+            <div class="p-3">
+                <h4 class="font-bold text-lg">{{ post.title }}</h4>
+                <p class="text-gray-600">{{ post.content|truncatewords:20 }}</p>
+                <a href="{% url 'post_detail' post.id %}" class="text-teal-500 mt-2 inline-block">Read More</a>
+            </div>
+        </div>
+        {% empty %}
+        <p>No posts available. <a href="{% url 'create_post' %}" class="text-blue-900 underline">Create One</a></p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

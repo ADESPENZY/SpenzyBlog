@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Contact Page{% endblock %}
+{% block main %}
+
+<section class="md:w-[80%] mx-auto mt-7 p-7 bg-green-50 font-robotoSerif">
+    <h1 class="text-6xl font-bold font-robotoSerif">About Us</h1>
+    <div class="mt-12 flex flex-col md:flex-row text-start justify-between">
+        <div class="md:w-[30%]">
+            <span class="text-3xl font-semibold">Independent business channel dedicated to providing comprehensive news and updates.</span>
+        </div>
+        <div class="md:w-[65%] flex flex-col gap-10 ">
+            <div>
+                <p class=>Who We Are: Welcome to  <span class="font-oswald font-semibold">SpenzyBlog</span> We are a passionate community of writers, thinkers, and enthusiasts dedicated to bringing you the latest and most insightful content across a variety of topics.
+                    Our mission is to inspire, inform, and engage with readers who seek fresh perspectives on [Technologies, Entertainments, Politics, Health and so on].
+               </p>
+               <p class="mt-1">
+                   Our Mission: At <span class="font-oswald font-semibold">SpenzyBlog</span> , we believe in the power of knowledge and storytelling.
+                   Our mission is to provide a platform where people can share diverse opinions, explore new ideas, and stay informed about the ever-changing world.
+                   Whether it's [blog categories like Technology, Politics, Sports, Health], we aim to deliver thoughtful content that makes a difference.
+               </p>
+            </div>
+
+            <div class="border-x-2 border-black px-5">
+                <p> <i class="fas fa-quote-left text-xl"></i> We started this blog to give voice to our own experiences and to connect with others who share our curiosity about the world. From [list of main topics],
+                     we're constantly exploring the intersection of personal interests and societal trends. <i class="fas fa-quote-right text-xl"></i>
+                </p>
+                <div class="mt-4">
+                    <p class="font-oswald font-semibold">Atoyebi Joshua</p>
+                    <p class="font-oswald font-semibold">CEO/Publisher</p>
+                </div>
+            </div>
+
+            <div>
+                <p>
+                    Our Community: At <span class="font-oswald font-semibold">SpenzyBlog</span>, we’re more than just writers – we’re a community of readers, creators, and innovators.
+                     We believe in the importance of conversation and encourage our audience to engage with us and each other through comments, feedback, and discussions.
+                </p>
+                <p class="mt-1">
+                    Join Us: Whether you're here for inspiration, education, or simply to keep up with the latest trends, <span class="font-oswald font-semibold">SpenzyBlog</span> has something for everyone.
+                    We're constantly growing, and we invite you to grow with us. Feel free to reach out, share your ideas, and be a part of the conversation!
+                </p>
+            </div>
+
+            <div class="flex gap-5 mt-5">
+                <div>
+                    <i class="fas fa-wifi text-2xl text-blue-600"></i>
+                    <p> 1 million + </p>
+                    <p>active subscribers</p>
+                </div>
+                <div>
+                    <i class="fas fa-user text-2xl text-blue-600"></i> 
+                    <p> 4 million </p>
+                    <p>monthly unique</p>
+                </div>
+                <div>
+                    <i class="fas fa-eye text-2xl text-blue-600 "></i>
+                    <p> 8 million </p>
+                    <p>monthly page views</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="border-b-2 border-color-mustard-yellow md:w-[80%] mx-auto my-7">
+    </div>
+    <div class=" mt-10">
+        <span class="text-3xl font-semibold">Editors</span>
+        <div class="grid md:grid-cols-3 p-3 m-3 gap-5">
+            <div class="flex gap-3">
+                <img src="{% static 'image/about1.png' %}" class="h-30 w-30 rounded-full cursor-pointer" alt="">
+                <div>
+                    <span class="font-semibold text-2xl">Atoyebi Joshua</span>
+                    <p>Chief Editor</p>
+                </div>
+            </div>
+            <div class="flex gap-3">
+                <img src="{% static 'image/about2.png' %}" class="h-30 w-30 rounded-full cursor-pointer" alt="">
+                <div>
+                    <span class="font-semibold text-2xl"> Adeoti sumbo</span>
+                    <p>Chief Editor</p>
+                </div>
+            </div>
+            <div class="flex gap-3">
+                <img src="{% static 'image/about3.png' %}" class="h-30 w-30 rounded-full cursor-pointer" alt="">
+                <div>
+                    <span class="font-semibold text-2xl">Atoyebi Janet</span>
+                    <p>Chief Editor</p>
+                </div>
+            </div>
+            <div class="flex gap-3">
+                <img src="{% static 'image/about4.png' %}" class="h-30 w-30 rounded-full cursor-pointer" alt="">
+                <div>
+                    <span class="font-semibold text-2xl">Shokunbi Japhet</span>
+                    <p>Chief Editor</p>
+                </div>
+            </div>
+            <div class="flex gap-3">
+                <img src="{% static 'image/about5.png' %}" class="h-30 w-30 rounded-full cursor-pointer" alt="">
+                <div>
+                    <span class="font-semibold text-2xl">Gabriel Judith</span>
+                    <p>Chief Editor</p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}
