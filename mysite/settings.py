@@ -25,7 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-b2rg*uo13p=tnh1&o_y$i_1-%j0b6y0yfg7z66(ca)(qmiomm^')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'True')=="True"
+# DEBUG = os.environ.get('DEBUG', 'True')=="True"
+DEBUG = os.environ.get('DEBUG', 'False').lower() in ['true', '1']
+
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'spenzyblog.onrender.com']
 
