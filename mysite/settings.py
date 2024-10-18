@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-b2rg*uo13p=tnh1&o_y$i_1-%j0b6y0yfg7z66(ca)(qmiomm^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'spenzyblog.onrender.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -132,9 +132,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-# STATICFILES_DIRS=[
-#     BASE_DIR / 'static'
-# ]
+STATICFILES_DIRS=[
+    BASE_DIR / 'static'
+]
 STATIC_ROOT = BASE_DIR/'static'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
