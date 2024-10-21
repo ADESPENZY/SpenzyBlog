@@ -65,7 +65,7 @@
             {% if latest_technology_post %}
             <a href="{% url 'post_detail' latest_technology_post.pk %}">
                 <div>
-                    <img src="{{ latest_technology_post.image.url }}" class="rounded-t-sm" alt="blog-images">
+                    <img src="{{ latest_technology_post.image.url }}" class="rounded-t-sm w-full h-full object-cover" alt="blog-images">
                 </div>
                 <div class="p-7 space-y-2">
                     <p class="bg-color-mustard-yellow inline-block px-1">{{ latest_technology_post.category.name }}</p>
