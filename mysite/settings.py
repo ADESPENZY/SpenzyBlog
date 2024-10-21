@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-b2rg*uo13p=tnh1&o_y$i_1-%j0b6y0yfg7z66(ca)(qmiomm^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'spenzyblog.onrender.com']
 
@@ -88,11 +89,16 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+load_dotenv()
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'spenzy_blog',
+        'USER': 'spenzy_blog_user',
+        'PASSWORD': 'kCGK4GyuIsKTCC09PypoYxiIp2dhl6LM',
+        'HOST': 'dpg-csasgsl6l47c73f3d9r0-a.oregon-postgres.render.com',
+        'PORT': '5432',
     }
 }
 
@@ -159,12 +165,4 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.getenv('EMAIL_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASSWORD')
-DEFAULT_FROM_EMAIL = os.getenv('EMAIL_USER')
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
