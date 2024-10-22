@@ -1,0 +1,16 @@
+# Ignore the media folder
+media/
+
+# Ignore the SQLite database
+db.sqlite3
+
+# Ignore Python bytecode files
+*.pyc
+__pycache__/
+
+# Ignore virtual environments
+venv/
+env/
+
+# Ignore static files (if using collectstatic in production)
+staticfiles/
