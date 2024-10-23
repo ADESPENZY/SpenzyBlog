@@ -1,5 +1,3 @@
-# Ignore the media folder
-media/
 
 # Ignore the SQLite database
 db.sqlite3
