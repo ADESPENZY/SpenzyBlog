@@ -12,3 +12,4 @@ env/
 
 # Ignore static files (if using collectstatic in production)
 staticfiles/
+.qodo
